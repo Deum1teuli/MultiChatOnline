@@ -28,7 +28,7 @@ var Chat = {
             fontCss = "@import url('" + fontLink + "');";
         }
         else {
-            fontCss = "@font-face {font-family: 'custom'; src: url('" + fontLink + "')}";
+            fontCss = "@font-face {font-family: 'custom'; src: url('" + fontLink + "');}";
             fontFamily = "'custom', sans-serif";
         }
         Chat.styles.chatStyle = Chat.addCss(fontCss + ' .line {font-family: ' + fontFamily + '; line-height: ' + fontSize + 'px; font-size: ' + fontSize + 'px; color: ' + fontColor + ';} #chat {background: ' + background + ';}');
