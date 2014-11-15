@@ -1,5 +1,6 @@
 var Chat = {
     settings: window.settings || {
+        background: 'inherit',
         emoticonsScale: 1,
         fontLink: 'http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&subset=latin,cyrillic',
         fontFamily: "'Open Sans Condensed', sans-serif",
@@ -13,6 +14,7 @@ var Chat = {
     },
 
     updateChatStyle: function () {
+        var background = Chat.settings.background || 'inherit';
         var fontLink = Chat.settings.fontLink || "http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&subset=latin,cyrillic";
         var fontFamily = Chat.settings.fontFamily || "'Open Sans Condensed', sans-serif";
         var fontSize = Chat.settings.fontSize || 16;
@@ -26,14 +28,15 @@ var Chat = {
             fontCss = "@import url('" + fontLink + "');";
         }
         else {
-            fontCss = "@font-face {font-family: custom; src:url('" + fontLink + "'};";
-            fontFamily = 'custom, sans-serif';
+            fontCss = "@font-face {font-family: 'custom'; src: url('" + fontLink + "')}";
+            fontFamily = "'custom', sans-serif";
         }
-        Chat.styles.chatStyle = Chat.addCss(fontCss + ' .line {font-family:' + fontFamily + '; line-height: ' + fontSize + 'px; font-size: ' + fontSize + 'px; color: ' + fontColor + ';}');
+        Chat.styles.chatStyle = Chat.addCss(fontCss + ' .line {font-family: ' + fontFamily + '; line-height: ' + fontSize + 'px; font-size: ' + fontSize + 'px; color: ' + fontColor + ';} #chat {background: ' + background + ';}');
     },
 
     changeBg: function (val) {
-        $('#chat').css('background-color', val);
+        Chat.settings.background = val;
+        Chat.updateChatStyle();
     },
 
     changeFont: function (link, family) {

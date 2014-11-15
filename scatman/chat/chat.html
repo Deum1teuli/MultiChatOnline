@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Chat (dev)</title>
+    <link rel="stylesheet" type="text/css" href="chat.css">
+    <link rel="stylesheet" type="text/css" href="../lib/animate.css">
+    <script src="../lib/jquery.min.js"></script>
+    <script src="../lib/socket.io.js"></script>
+    <script src="../lib/sockjs.min.js"></script>
+</head>
+
+<body>
+    <script>
+        var settings = {
+            background: '#000',
+            emoticonsScale: 1,
+            fontLink: '../assets/vampire.ttf',
+            fontSize: 16,
+            fontColor: '#ff0000',
+            inAnimation: 'fadeInRight'
+        };
+    </script>
+    <div id="chat"></div>
+    <script src="chat.js"></script>
+    <script src="chats.js"></script>
+    <script>
+        new TwitchChat('http://www.twitch.tv/scatmanok');
+        new GGChat('http://goodgame.ru/channel/Scatman/');
+        new Sc2tvChat('http://sc2tv.ru/channel/scatman');
+    </script>
+</body>
+
+</html>
