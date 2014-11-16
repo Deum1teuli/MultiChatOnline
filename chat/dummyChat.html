@@ -12,23 +12,14 @@
 </head>
 
 <body>
-    <script>
-        var settings = {
-            background: '#000',
-            emoticonsScale: 1,
-            fontLink: '../assets/vampire.ttf',
-            fontSize: 16,
-            fontColor: '#ff0000',
-            inAnimation: 'fadeInRight'
-        };
-    </script>
     <div id="chat"></div>
     <script src="chat.js"></script>
-    <script src="chats.js"></script>
+    <script src="dummyChats.js"></script>
     <script>
-        new TwitchChat('http://www.twitch.tv/scatmanok');
-        new GGChat('http://goodgame.ru/channel/Scatman/');
-        new Sc2tvChat('http://sc2tv.ru/channel/scatman');
+        new TwitchChat('dummy');
+        new GGChat('dummy');
+        new Sc2tvChat('dummy');
+        new CGChat('dummy');
     </script>
 </body>
 

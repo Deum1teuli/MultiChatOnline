@@ -36,6 +36,9 @@
 .sc2tv-source {
     background: url('http://sc2tv.ru/favicon.ico') no-repeat center center;
 }
+.cg-source {
+    background: url('http://cybergame.tv/favicon.ico') no-repeat center center;
+}
 .emoticon {
     background-size: cover;
     display: inline-block;
@@ -49,6 +52,9 @@
 }
 .sc2tv-nick {
     color: #7797be;
+}
+.cg-nick {
+    color: #2D6987;
 }
 .message {
     word-break: break-all;

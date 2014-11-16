@@ -133,3 +133,33 @@ Sc2tvChat.prototype.createMessage = function () {
         this.createMessage()
     }.bind(this), Math.random() * 5000);
 };
+
+function CGChat(channel_id) {
+    this.channel_id = channel_id || null;
+    Chat.emoticonsLoaded(CGChat.sname);
+
+    setTimeout(function () {
+        this.createMessage()
+    }.bind(this), Math.random() * 5000);
+}
+
+CGChat.sname = 'cg';
+
+CGChat.emoticons = [{n: 1, name: 'peka', regex: /peka/g, image: {height: 20, width: 20, url: "http://cybergame.tv/smiles/peka.png"}},
+                    {n: 2, name: ':=D', regex: /:=D/g, image: {height: 20, width: 20, url: "http://cybergame.tv/smiles/bigsmile_20.png"}},
+                    {n: 3, name: '(rofl)', regex: /\(rofl\)/g, image: {height: 20, width: 20, url: "http://cybergame.tv/smiles/rofl_20.png"}},
+                    {n: 4, name: '(sun)', regex: /\(sun\)/g, image: {height: 20, width: 20, url: "http://cybergame.tv/smiles/sunshine_20.png"}},
+                    {n: 5, name: '(ok)', regex: /\(ok\)/g, image: {height: 20, width: 20, url: "http://chat.sc2tv.ru/img/oscar.png?1"}}];
+
+CGChat.prototype.createMessage = function () {
+    var userData = {when: 123};
+    var message = getRandomItem(messages);
+    var messageText = message.message;
+    if (getRandomBool(35)) {
+        messageText += ' ' + getRandomItem(CGChat.emoticons).name;
+    }
+    Chat.insert(CGChat.sname, this.channel_id, message.name, userData, messageText, null);
+    setTimeout(function () {
+        this.createMessage()
+    }.bind(this), Math.random() * 5000);
+};

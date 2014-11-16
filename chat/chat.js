@@ -31,7 +31,7 @@ var Chat = {
             fontCss = "@font-face {font-family: 'custom'; src: url('" + fontLink + "');}";
             fontFamily = "'custom', sans-serif";
         }
-        Chat.styles.chatStyle = Chat.addCss(fontCss + ' .line {font-family: ' + fontFamily + '; line-height: ' + fontSize + 'px; font-size: ' + fontSize + 'px; color: ' + fontColor + ';} #chat {background: ' + background + ';}');
+        Chat.styles.chatStyle = Chat.addCss(fontCss + ' #chat {background: ' + background + ';} .line {font-family: ' + fontFamily + '; line-height: ' + fontSize + 'px; font-size: ' + fontSize + 'px; color: ' + fontColor + ';}');
     },
 
     changeBg: function (val) {
@@ -57,7 +57,7 @@ var Chat = {
 
     changeEmoticonsScale: function (val) {
         Chat.settings.emoticonsScale = val;
-        Chat.vars.emoticonsStyles.forEach(function (style) {
+        Chat.styles.emoticonsStyles.forEach(function (style) {
             style.remove();
         });
         emoticonsStyles = [];
@@ -147,6 +147,14 @@ var Chat = {
         var msgDiv = Chat.createMessage('<span class="source ' + Sc2tvChat.sname + '-source"></span>', tagsSpan, nickSpan, messageSpan);
         return msgDiv;
     },
+    
+    createMessageCG: function (source, channel, nick, userData, message, action) {
+        message = Chat.emoticonizeCG(message, userData);
+        var nickSpan = '<span class="nick ' + CGChat.sname + '-nick" style="">' + nick + '</span>';
+        var messageSpan = '<span class="message">' + message + '</span>';
+        var msgDiv = Chat.createMessage('<span class="source ' + CGChat.sname + '-source"></span>', null, nickSpan, messageSpan);
+        return msgDiv;
+    },
 
     createMessage: function (source, tags, nick, msg) {
         var source = source || '',
@@ -176,6 +184,8 @@ var Chat = {
             msgEl = Chat.createMessageSc2tv(source, channel, nick, userData, message, action);
         } else if (source == GGChat.sname) {
             msgEl = Chat.createMessageGG(source, channel, nick, userData, message, action);
+        } else if (source == CGChat.sname) {
+            msgEl = Chat.createMessageCG(source, channel, nick, userData, message, action);
         }
 
         msgEl.hide();
@@ -214,7 +224,7 @@ var Chat = {
     },
 
     emoticonsLoaded: function (source) {
-        var emoticons = (source == TwitchChat.sname && TwitchChat.emoticons) || (source == GGChat.sname && GGChat.emoticons) || (source == Sc2tvChat.sname && Sc2tvChat.emoticons),
+        var emoticons = (source == TwitchChat.sname && TwitchChat.emoticons) || (source == GGChat.sname && GGChat.emoticons) || (source == Sc2tvChat.sname && Sc2tvChat.emoticons) || (source == CGChat.sname && CGChat.emoticons),
             cssString = '',
             zoom = Chat.settings.emoticonsScale || 1,
             lineHeight = Chat.settings.fontSize ? Chat.settings.fontSize + 6 : 19;
@@ -291,6 +301,16 @@ var Chat = {
                     message = message.replace(emoticon.regex, '<span class="' + Sc2tvChat.sname + '-emo-' + emoticon.n + ' emoticon"></span>');
                 }
             });
+        });
+        return message;
+    },
+    
+    emoticonizeCG: function (message, userData) {
+        if (!userData.when) return message;
+        CGChat.emoticons.forEach(function (emoticon) {
+            if (message.match(emoticon.regex)) {
+                message = message.replace(emoticon.regex, '<span class="' + CGChat.sname + '-emo-' + emoticon.n + ' emoticon"></span>');
+            }
         });
         return message;
     },

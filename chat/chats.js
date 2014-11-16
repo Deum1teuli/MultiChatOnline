@@ -163,6 +163,7 @@ GGChat.prototype.start = function () {
     socket.onclose = function () {
         Chat.insertLog(GGChat.sname, this.channel_id, "Вы были отключены от сервера");
     }.bind(this);
+    this.socket = socket;
 };
 
 GGChat.loadEmoticons = function () {
@@ -323,5 +324,77 @@ Sc2tvChat.loadEmoticons = function () {
         Sc2tvChat.emoticons_status = 'ok';
         Chat.insertLog(Sc2tvChat.sname, null, "Смайлы получены.");
         Chat.emoticonsLoaded(Sc2tvChat.sname);
+    });
+};
+
+function CGChat(channel_id) {
+    this.channel_id = CGChat.getChannelId(channel_id) || null;
+    this.socket = null;
+
+    CGChat.loadEmoticons();
+    this.start();
+}
+
+CGChat.sname = 'cg';
+
+CGChat.emoticons_status = '';
+CGChat.emoticons = [];
+
+CGChat.getChannelId = function (channel) {
+    var matches;
+    if (matches = channel.trim().match(/^(?:http:\/\/)?(?:www\.)?cybergame\.tv\/(.+?)\/?$/)) {
+        return matches[1];
+    }
+    return channel;
+};
+
+CGChat.prototype.start = function () {
+    var socket = new SockJS('http://cybergame.tv:9090');
+    socket.onopen = function (e) {
+        Chat.insertLog(CGChat.sname, this.channel_id, "Подключено.");
+        Chat.insertLog(CGChat.sname, this.channel_id, "Ожидание подключения к каналу...");
+        socket.send("{\"command\":\"login\",\"message\":\"{\\\"login\\\":\\\"\\\",\\\"password\\\":\\\"\\\",\\\"channel\\\":\\\"#" + this.channel_id + "\\\"}\"}");
+    }.bind(this);
+    socket.onmessage = function (e) {
+        var data = JSON.parse(e.data);
+        if (data.command == 'chatMessage') {
+            var message = JSON.parse(data.message);
+            Chat.insert(CGChat.sname, this.channel_id, message.from, message, message.text, false);
+        } else if (data.command == 'changeWindow') {
+            Chat.insertLog(CGChat.sname, this.channel_id, "Подключение к каналу установлено...");
+        }
+    }.bind(this);
+    socket.onclose = function () {
+        Chat.insertLog(CGChat.sname, this.channel_id, "Вы были отключены от сервера");
+    }.bind(this);
+    this.socket = socket;
+};
+
+CGChat.loadEmoticons = function () {
+    if (CGChat.emoticons_status == 'getting' || CGChat.emoticons_status == 'ok') {
+        return;
+    }
+    Chat.insertLog(CGChat.sname, null, "Ожидание смайлов...");
+    CGChat.emoticons_status = 'getting';
+    $.get("http://cybergame.tv/cgchat.htm", null, null, 'text').done(function (data) {
+        var rawSmiles = data.match(/smiles = (\{[\s\S]*?\});/);
+        var smiles = eval('(' + rawSmiles[1] + ')');
+        var i = 0;
+        $.each(smiles, function (name, url) {
+            i += 1;
+            var smile = {
+                n: i,
+                image: {
+                    width: 20,
+                    height: 20,
+                    url: 'http://cybergame.tv/' + url
+                }
+            };
+            smile.regex = new RegExp(name.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&"), 'g');
+            CGChat.emoticons.push(smile);
+        });
+        CGChat.emoticons_status = 'ok';
+        Chat.insertLog(CGChat.sname, null, "Смайлы получены.");
+        Chat.emoticonsLoaded(CGChat.sname);
     });
 };

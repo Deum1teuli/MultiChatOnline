@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Чат (прототип (в разработке))</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&amp;subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="lib/jquery-ui-1.11.2.custom/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/jquery.ui.fontSelector.css">
+    <link rel="stylesheet" type="text/css" href="chat/chat.css">
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <link rel="stylesheet" type="text/css" href="lib/animate.css">
+    <script src="lib/jquery.min.js"></script>
+    <script src="lib/socket.io.js"></script>
+    <script src="lib/sockjs.min.js"></script>
+    <script src="lib/jquery-ui-1.11.2.custom/jquery-ui.min.js"></script>
+    <script src="lib/jquery.ui.fontSelector.min.js"></script>
+    <script src="lib/Blob.js"></script>
+    <script src="lib/FileSaver.min.js"></script>
+</head>
+
+<body>
+    <div id="content">
+        <div id="tabs">
+            <ul>
+                <li><a href="#tabs-1">1. Общие</a>
+                </li>
+                <li><a href="#tabs-2">1a. Рамки (в разр.)</a>
+                </li>
+                <li><a href="#tabs-3">2. Каналы</a>
+                </li>
+                <li><a href="#tabs-4">3. Установка/Помощь</a>
+                </li>
+            </ul>
+            <div id="tabs-1">
+                <p>
+                    <label for="font">Шрифт:</label>
+                    <select id="font">
+                    </select>
+                </p>
+                <p>
+                    <input type="file" id="fontFile">
+                </p>
+                <p>
+                    <label for="background">Цвет фона</label>
+                    <input id="background" name="background" type="color" value="#c0c0c0">
+                    <input id="noBackground" name="noBackground" type="checkbox">
+                    <label for="noBackground">Нету</label>
+                </p>
+                <p>
+                    <label for="fontColor">Цвет текста</label>
+                    <input id="fontColor" name="fontColor" type="color">
+                </p>
+                <p>
+                    <label for="inAnimation">Анимация:</label>
+                    <select name="inAnimation" id="inAnimation">
+                        <option value="flash">flash</option>
+                        <option value="rubberBand">rubberBand</option>
+                        <!--                        <option value="tada">tada</option>-->
+                        <option value="bounceIn">bounceIn</option>
+                        <option value="bounceInDown">bounceInDown</option>
+                        <option value="bounceInLeft">bounceInLeft</option>
+                        <option value="bounceInRight">bounceInRight</option>
+                        <!--                        <option value="bounceInUp">bounceInUp</option>-->
+                        <option value="fadeIn">fadeIn</option>
+                        <option value="fadeInDown">fadeInDown</option>
+                        <!--                        <option value="fadeInDownBig">fadeInDownBig</option>-->
+                        <option value="fadeInLeft">fadeInLeft</option>
+                        <option value="fadeInLeftBig">fadeInLeftBig</option>
+                        <option value="fadeInRight">fadeInRight</option>
+                        <option value="fadeInRightBig">fadeInRightBig</option>
+                        <!--                        <option value="fadeInUp">fadeInUp</option>-->
+                        <!--                        <option value="fadeInUpBig">fadeInUpBig</option>-->
+                        <option value="flipInX">flipInX</option>
+                        <option value="flipInY">flipInY</option>
+                        <option value="lightSpeedIn">lightSpeedIn</option>
+                        <!--                        <option value="rotateIn">rotateIn</option>-->
+                        <option value="rotateInDownLeft">rotateInDownLeft</option>
+                        <option value="rotateInDownRight">rotateInDownRight</option>
+                        <!--                        <option value="rotateInUpLeft">rotateInUpLeft</option>-->
+                        <!--                        <option value="rotateInUpRight">rotateInUpRight</option>-->
+                        <!--                        <option value="rollIn">rollIn</option>-->
+                        <option value="zoomIn">zoomIn</option>
+                        <option value="zoomInDown">zoomInDown</option>
+                        <option value="zoomInLeft">zoomInLeft</option>
+                        <option value="zoomInRight">zoomInRight</option>
+                        <!--                        <option value="zoomInUp">zoomInUp</option>-->
+                    </select>
+                </p>
+                <p>
+                    <label for="fontSize">Размер шрифта:</label>
+                    <select name="fontSize" id="fontSize">
+                        <option value="8">8</option>
+                        <option value="10">10</option>
+                        <option value="12">12</option>
+                        <option value="14">14</option>
+                        <option value="16">16</option>
+                        <option value="18">18</option>
+                        <option value="20">20</option>
+                        <option value="22">22</option>
+                        <option value="24">24</option>
+                        <option value="26">26</option>
+                        <option value="28">28</option>
+                        <option value="30">30</option>
+                        <option value="32">32</option>
+                    </select>
+                </p>
+                <p>
+                    <label for="emoticonsScaleL">Размер смайлов:</label>
+                    <input type="text" id="emoticonsScaleL" readonly>
+                    <div id="emoticonsScale"></div>
+                </p>
+            </div>
+            <div id="tabs-2">
+            </div>
+            <div id="tabs-3">
+                <p>
+                    <input type="button" id="addChannel" value="Добавить">
+                </p>
+            </div>
+            <div id="tabs-4">
+                <p>
+                    <input type="button" id="download" value="Скачать файл для встраивания">
+                </p>
+            </div>
+        </div>
+        <div id="chat" class="dummyChat"></div>
+    </div>
+    <script src="chat/chat.js"></script>
+    <script src="chat/dummyChats.js"></script>
+    <script>
+        new TwitchChat('dummy');
+        new GGChat('dummy');
+        new Sc2tvChat('dummy');
+        new CGChat('dummy');
+    </script>
+    <script src="index.js"></script>
+</body>
+
+</html>
