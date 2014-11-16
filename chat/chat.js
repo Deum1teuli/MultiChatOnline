@@ -135,7 +135,7 @@ var Chat = {
     },
 
     createMessageSc2tv: function (source, channel, nick, userData, message, action) {
-        message = message.replace(/\[\/?b\]/g, '');
+        message = message.replace(/\[\/?b\]/g, '').replace(/\[\/?url\]/g, '');
         message = Chat.emoticonizeSc2tv(message, userData);
         var classes = 'sc2tv-role-' + userData.role;
         var tagsSpan = '';
