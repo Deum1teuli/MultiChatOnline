@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Chat (dev)</title>
+    <link rel="stylesheet" type="text/css" href="chat.css">
+    <link rel="stylesheet" type="text/css" href="../lib/animate.css">
+    <script src="../lib/jquery.min.js"></script>
+    <script src="../lib/socket.io.js"></script>
+    <script src="../lib/sockjs.min.js"></script>
+</head>
+
+<body>
+    <div id="chat"></div>
+    <script src="chat.js"></script>
+    <script src="chats.js"></script>
+    <script src="dummyChats.js"></script>
+    <script>
+        new DummyTwitchChat('streamer');
+        new DummyGGChat('streamer');
+        new DummySc2tvChat('streamer');
+        new DummyCGChat('streamer');
+    </script>
+</body>
+
+</html>

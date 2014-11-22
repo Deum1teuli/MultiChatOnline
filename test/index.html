@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Чат (прототип (в разработке))</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&amp;subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="lib/jquery-ui-1.11.2.custom/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/jquery.ui.fontSelector.css">
+    <link rel="stylesheet" type="text/css" href="chat/chat.css">
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <link rel="stylesheet" type="text/css" href="lib/animate.css">
+    <script src="lib/jquery.min.js"></script>
+    <script src="lib/socket.io.js"></script>
+    <script src="lib/sockjs.min.js"></script>
+    <script src="lib/jquery-ui-1.11.2.custom/jquery-ui.min.js"></script>
+    <script src="lib/jquery.ui.fontSelector.min.js"></script>
+    <script src="lib/Blob.js"></script>
+    <script src="lib/FileSaver.min.js"></script>
+</head>
+
+<body>
+    <div id="regLineStyle"></div>
+    <div id="chatStyle"></div>
+    <div id="content">
+        <div class="column" style="width:60%;padding-top:30px;">
+        <div id="tabs">
+            <ul>
+                <li><a href="#tabs-1">1. Общие</a>
+                </li>
+                <li><a href="#tabs-2">1a. Рамки (в разр.)</a>
+                </li>
+                <li><a href="#tabs-3">2. Каналы</a>
+                </li>
+                <li><a href="#tabs-4">3. Установка/Помощь</a>
+                </li>
+            </ul>
+            <div id="tabs-1">
+                <div class="row">
+                    <div class="column">
+                        <label for="font">Шрифт:</label>
+                        <br>
+                        <select id="font">
+                        </select>
+                        <br>
+                        <label for="fontFile">Или выберите файл со шрифтом:</label>
+                        <br>
+                        <input type="file" id="fontFile">
+                    </div>
+                    <div class="column">
+                        <label for="fontSize">Размер шрифта:</label>
+                        <br>
+                        <select id="fontSize"></select>
+                    </div>
+                    <div class="column">
+                        <label for="fontColor">Цвет текста:</label>
+                        <br>
+                        <input id="fontColor" type="color">
+                    </div>
+                    <div class="column">
+                        <label for="background">Цвет фона:</label>
+                        <br>
+                        <input id="background" type="color" value="#c0c0c0">
+                        <br>
+                        <input id="noBackground" type="checkbox">
+                        <label for="noBackground">нет</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column">
+                        <label for="inAnimation">Анимация появления сообщений:</label>
+                        <br>
+                        <select id="inAnimation">
+                        </select>
+                    </div>
+                    <div class="column">
+                        <label for="outAnimation">Анимация исчезновения сообщений:</label>
+                        <br>
+                        <select id="outAnimation">
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <label for="emoticonsScaleL">Размер смайлов:</label>
+                    <input type="text" id="emoticonsScaleL" readonly>
+                    <div id="emoticonsScale"></div>
+                </div>
+                <div class="row">
+                    <div class="column">
+                        <input id="showSources" type="checkbox">
+                        <label for="showSources">Показывать иконки сайтов</label>
+                    </div>
+                    <div class="column">
+                        <input id="showBadges" type="checkbox">
+                        <label for="showBadges">Показывать значки</label>
+                    </div>
+                    <div class="column">
+                        <input id="breakWords" type="checkbox">
+                        <label for="breakWords">Переносить по словам</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column">
+                        <input id="fromStreamer" type="checkbox">
+                        <label for="fromStreamer">Выделять сообщения от стримера</label>
+                    </div>
+                     <div class="column">
+                        <input id="forStreamer" type="checkbox">
+                        <label for="forStreamer">Выделять сообщения стимеру</label>
+                    </div>
+                </div>
+            </div>
+            <div id="tabs-2">
+            </div>
+            <div id="tabs-3">
+                <p>
+                    <input type="button" id="addChannel" value="Добавить">
+                </p>
+            </div>
+            <div id="tabs-4">
+                <p>
+                    <input type="button" id="download" value="Скачать файл для встраивания">
+                </p>
+            </div>
+        </div>
+        </div>
+        <div class="column" style="width:35%">
+        <div id="chat" class="dummyChat"></div>
+        </div>
+    </div>
+    <script src="chat/chat.js"></script>
+    <script src="chat/chats.js"></script>
+    <script src="chat/dummyChats.js"></script>
+    <script>
+        new DummyTwitchChat('streamer');
+        new DummyGGChat('streamer');
+        new DummySc2tvChat('streamer');
+        new DummyCGChat('streamer');
+    </script>
+    <script src="index.js"></script>
+</body>
+
+</html>
