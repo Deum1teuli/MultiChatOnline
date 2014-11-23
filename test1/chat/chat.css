@@ -1,0 +1,190 @@
+@font-face {
+    font-family: icomoon;
+    src: url(../assets/icomoon.eot?#iefix) format('embedded-opentype'), url(../assets/icomoon.woff?ver=1223123) format('woff'), url(../assets/icomoon.ttf?312313) format('truetype'), url(../assets/icomoon.svg#icomoon) format('svg');
+    font-weight: 400;
+    font-style: normal;
+}
+#chat {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    overflow: hidden;
+}
+#chat-inner {
+    position: absolute;
+}
+.line {
+    position: absolute;
+    margin-left: 3px;
+    margin-right: 3px;
+    padding-top: 2px;
+    padding-bottom: 3px;
+    /*right: 0;
+    left: 0;*/
+}
+.line .line-inner {
+    display: inline-block;
+    animation-iteration-count: infinite;
+    -moz-animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+}
+.source {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin-right: 3px;
+    margin-bottom: -1px;
+}
+.twitch-source {
+    background: url('http://www.twitch.tv/favicon.ico') no-repeat center center;
+}
+.gg-source {
+    background: url('http://goodgame.ru/images/icons/favicon.png') no-repeat center center;
+}
+.sc2tv-source {
+    background: url('http://sc2tv.ru/favicon.ico') no-repeat center center;
+}
+.cg-source {
+    background: url('http://cybergame.tv/favicon.ico') no-repeat center center;
+}
+.emoticon {
+    background-size: cover;
+    display: inline-block;
+}
+.nick {
+    font-weight: bold;
+    text-transform: capitalize;
+}
+.gg-nick {
+    color: #73adff;
+}
+.sc2tv-nick {
+    color: #7797be;
+}
+.cg-nick {
+    color: #2D6987;
+}
+.message {
+    /*word-break: break-all;
+    word-wrap: break-word;*/
+}
+.twitch-tag {
+    display: inline-block;
+    text-indent: 21px;
+    background-position: 0 center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: inline-block;
+    height: 18px;
+    min-width: 18px;
+    width: 18px;
+    padding: 0;
+    margin-right: 3px;
+    margin-bottom: -1px;
+    text-indent: -9999px;
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    overflow: hidden;
+}
+.twitch-turbo {
+    background-color: #6441a5;
+    background-image: url(//www-cdn.jtvnw.net/images/xarth/g/g18_turbo-FFFFFF80.png);
+}
+.twitch-moderator {
+    background-color: #009900;
+    background-image: url(//www-cdn.jtvnw.net/images/xarth/g/g18_sword-FFFFFF80.png);
+}
+.twitch-broadcaster {
+    background-color: #000000;
+    background-image: url(//www-cdn.jtvnw.net/images/xarth/g/g18_camera-FFFFFF80.png);
+}
+.twitch-staff {
+    background-color: #6441a5;
+    background-image: url(//www-cdn.jtvnw.net/images/xarth/g/g18_wrench-FFFFFF80.png);
+}
+.twitch-admin {
+    background-color: #FF0000;
+    background-image: url(//www-cdn.jtvnw.net/images/xarth/g/g18_badge-FFFFFF80.png);
+}
+.gg-casual.gg-donat1 {
+    color: #e7820b!important;
+}
+.gg-casual.gg-donat2 {
+    color: #b4b4b4!important;
+}
+.gg-casual.gg-donat3 {
+    color: #d2dc28!important;
+}
+.gg-casual.gg-donat4 {
+    color: #8781bd!important;
+}
+.gg-casual.gg-donat5 {
+    color: #30D5C8!important;
+}
+.gg-casual.gg-premium {
+    color: #0b7d1c!important;
+}
+.gg-tag {
+    font-size: 16px!important;
+    font-family: icomoon;
+    display: inline-block;
+    font-size: 85%;
+    margin-right: 2px;
+}
+.gg-moder {
+    color: #f93f5a!important;
+}
+.gg-streamer {
+    color: #f1bd13!important;
+}
+.no-before:before {
+    content: none!important;
+}
+.sc2tv-role-user {
+    color: #7797be !important;
+}
+.sc2tv-role-root {
+    color: #BC3C3E !important;
+    font-style: italic;
+}
+.sc2tv-role-color-red {
+    color: #BC3C3E !important;
+}
+.sc2tv-role-color-pink {
+    color: #FFC0CB !important;
+}
+.sc2tv-role-color-purple {
+    color: #DF92F9 !important;
+}
+.sc2tv-role-moderator {
+    color: #C57C08 !important;
+}
+.sc2tv-role-editor {
+    color: #dad871 !important;
+}
+.sc2tv-role-userstream-editor {
+    color: #009999 !important;
+}
+.sc2tv-role-streamer {
+    color: #5DA130 !important;
+}
+.sc2tv-role-prime-streamer {
+    color: #5DA130 !important;
+}
+.sc2tv-top-supporter {
+    background-image: url('http://chat.sc2tv.ru/img/donate_01.png');
+    display: inline-block;
+    margin-right: 2px;
+    width: 15px;
+    height: 14px;
+}
+.sc2tv-top-antisupporter {
+    background-image: url('http://chat.sc2tv.ru/img/antidonate.png');
+    display: inline-block;
+    margin-right: 2px;
+    width: 16px;
+    height: 16px;
+}
